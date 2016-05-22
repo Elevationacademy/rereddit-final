@@ -37,13 +37,6 @@ UserSchema.methods.generateJWT = function() {
 };
 
 
-
-
-// UserSchema.methods.addFriend = function() {
-//  // this.friends.push("test"); 
-//  console.log('hola', );
-// }
-
 var User = mongoose.model('User', UserSchema);
 
 module.exports = User;

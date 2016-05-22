@@ -128,10 +128,9 @@ router.post('/posts/:post/comments', function(req, res, next) {
 });
 
 //post friends
-router.post('/users/:user/', function(req, res, next) {
+router.put('/users/:user/', function(req, res, next) {
   friendId = "573d6dba0c7cd64911441c29"; //tali
   id = req.user.id; //molly
-  req.friend
   tali =  {
     "_id": "573d6dba0c7cd64911441c29",
     "hash": "654f890846aca2472802169e0a86d981f1ae7c41570105c232658cd41990bb68251a38c55aba18e5c55bb9d67697bdf6ae6bf6a780e81cea22e860f242613fdb",
@@ -140,13 +139,18 @@ router.post('/users/:user/', function(req, res, next) {
     "__v": 0,
     "friends": []
   };
-  console.log(id, tali);
-  console.log(req.user);
-  req.user.friends.push(tali);
-  tali.friends.push(req.user)
-  console.log(tali)
+  console.log("Actual user:" +req.user);
 
-  res.json(req.user);
+  
+  req.user.friends.push(tali);
+  tali.friends.push(req.user);
+
+
+  // tali.save(function(err, user){
+  //   res.json(req.user);
+  // });
+
+
 
 });
 
