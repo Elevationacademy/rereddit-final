@@ -4,24 +4,27 @@ app.controller('FriendFinderCtrl', ['$scope', 'auth','users', function($scope, a
   $scope.users = users.users;
   var cu = auth.currentUser();
 
-  $scope.isFriend = function(friendName){
-  	
-  	if(cu.friends.indexOf(friendName) > -1){
-  		return true
-  	}
+  console.log(cu);
 
+  $scope.isFriend = function(friend){
+  
+  	for(var i = 0; i < cu.friends.length; i++){
+  		if(cu.friends[i] == friend._id){
+  			return true;
+  		}
+  	}	
   	return false;
   }
 
-  $scope.isNotSelf = function(friendName){
-  	if(cu.username != friendName){
+  $scope.isNotSelf = function(friend){
+
+  	if(cu._id != friend._id){
   		return true;
   	}
   	return false;
   }
 
   $scope.addFriend = function(friend){
-  	console.log("in add friend")
   	users.addFriend(cu._id, friend);	
   }
 
