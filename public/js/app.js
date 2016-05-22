@@ -47,8 +47,9 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       templateUrl: '/templates/users.html',
       controller: 'UsersCtrl',
       resolve: {
-        usersPromise: ['usersServ', function(usersServ) {
-          return usersServ.getUsers();
+        usersPromise: ['usersServ', 'auth', function(usersServ, auth) {
+          usersServ.getFriends(auth.currentUser()._id);
+          usersServ.getUsers();
         }]
       }
     });

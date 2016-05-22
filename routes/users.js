@@ -7,8 +7,6 @@ router.post('/:id/addFriend', function (req, res, next) {
     if (err) {return next(err);}
 
     user.friends.push(req.body.id);
-    console.log(user);
-    console.log(req.body);
 
     user.save(function (err, user) {
       if (err) {return next(err);}
@@ -26,6 +24,14 @@ router.post('/:id/addFriend', function (req, res, next) {
       });
     });
   });
+});
+
+router.get('/:id/getFriends', function (req, res, next) {
+  User.findById(req.params.id, function (err, user) {
+    if (err) return next(err);
+
+    res.send(user.friends);
+  })
 });
 
 router.get('/getAll', function (req, res, next) {
