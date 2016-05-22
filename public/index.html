@@ -29,7 +29,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" ng-show="isLoggedIn()"><strong>{{ currentUser().username }}</strong> <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="">All Users</a></li>
+              <li><a href="" ng-click="allUsersPage()">All Users</a></li>
               <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
               <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
             </ul>
@@ -53,9 +53,11 @@
   <script src="javascripts/services/auth.js"></script>
   <script src="javascripts/controllers/authController.js"></script>
   <script src="javascripts/services/posts.js"></script>
+  <script src="javascripts/services/users.js"></script>
   <script src="javascripts/controllers/mainController.js"></script>
   <script src="javascripts/controllers/postsController.js"></script>
   <script src="javascripts/controllers/navController.js"></script>
+  <script src="javascripts/controllers/allUsersController.js"></script>
 
 </body>
 </html>
