@@ -1,5 +1,6 @@
 app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
   $scope.posts = posts.posts;
+  // console.log($scope.posts);
 
   $scope.addPost = function() {
     if ($scope.title === '') { return; }
@@ -11,9 +12,9 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
 
     $scope.title = '';
     $scope.link = '';
-  }
+  };
 
   $scope.incrementUpvotes = function(item) {
     posts.upvote(item);
-  }
+  };
 }]);

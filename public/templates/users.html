@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1 class="text-center">All Users</h1>
+    <div ng-repeat="user in users">
+      <button type="button" class="btn btn-danger" ng-show="addOrRemove(user)" ng-if="user.username != currentUsername" ng-click="removeFriend(user)">Remove Friend</button>
+      <button type="button" class="btn btn-primary" ng-hide="addOrRemove(user)" ng-if="user.username != currentUsername" ng-click="addFriend(user)">Add Friend</button>
+      <a ng-if="user.username != currentUsername">{{user.username}}</a>
+    </div>
+  </div>
+</div>
+
