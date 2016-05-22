@@ -34,9 +34,9 @@ UserSchema.methods.generateJWT = function() {
   }, 'myLittleSecret');
 };
 
-UserSchema.methods.addFriend = function (user) {
-  this.friends.push(user);
-};
+// UserSchema.methods.addFriend = function (user) {
+//   this.friends.push(user);
+// };
 
 var User = mongoose.model('User', UserSchema);
 

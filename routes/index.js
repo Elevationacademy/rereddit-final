@@ -89,26 +89,26 @@ router.param('comment', function(req, res, next, id) {
   });
 });
 
-router.param('user', function (req, res, next, id) {
+router.param('currentUser', function (req, res, next, id) {
   var query = User.findById(id);
 
   query.exec(function (err, user){
     if (err) { return next(err); }
     if (!user) { return next(new Error('can\'t find user')); }
 
-    req.user = user;
+    req.currentUser = user;
     return next();
   });
 });
 
-router.param('user2', function (req, res, next, id) {
+router.param('friend2Add', function (req, res, next, id) {
   var query = User.findById(id);
 
   query.exec(function (err, user){
     if (err) { return next(err); }
     if (!user) { return next(new Error('can\'t find user')); }
 
-    req.user2 = user;
+    req.friend2Add = user;
     return next();
   });
 });
@@ -155,18 +155,19 @@ router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
   });
 });
 
-router.put('/users/:user/friends/:user2/', function (req, res, next) {
+router.put('/users/:currentUser/friends/:friend2Add/', function (req, res, next) {
   // req.params
-  // console.log(req.params.user,req.params.user2, req.user, req.user2);
-  req.user.addFriend(req.params.user2);
-  req.user2.addFriend(req.params.user);
+  console.log(req.params, req.currentUser, req.body);
+  // console.log('1');
+  req.currentUser.friends.push(req.params.friend2Add);
+  req.friend2Add.friends.push(req.params.currentUser);
 
-  req.user.save(function(err, user) {
-    res.json(user);
-  });
-  req.user2.save(function(err, user) {
-    res.json(user);
-  });
+  req.currentUser.save()
+    // res.json(user);
+
+  req.friend2Add.save()
+    // res.json(user);
+  res.end();
 });
 
 module.exports = router;
