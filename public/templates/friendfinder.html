@@ -1,0 +1,15 @@
+<h1>All Users</h1>
+<div ng-repeat="user in users | orderBy:'username'">
+  
+  <div ng-if="isNotSelf(user.username)" class = 'user-list-item'>  
+    <div ng-if="isFriend(user.username)">
+      <button type="button" class="btn btn-danger">Remove Friend</button> {{user.username}}
+    </div>
+
+    <div ng-if="isFriend(user.username) == false">
+      <button  type="button" class="btn btn-primary">Add Friend</button> {{user.username}}
+    </div>
+  </div>
+
+</div>
+
