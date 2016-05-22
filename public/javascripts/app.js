@@ -47,7 +47,7 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       templateUrl: '/templates/allusers.html',
       controller: 'AllUsersCtrl',
       resolve: {
-        postPromise: ['users', function(users){
+        userPromise: ['users', function(users){
           
           return users.getAll();
         }]

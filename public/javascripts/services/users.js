@@ -8,7 +8,16 @@ app.factory('users', ['$http', function($http) {
         angular.copy(data.data, userService.users);
       });
     },
-  }
+
+    addFriend: function(clickedUserId, currentUserId) {
+      return $http.put('/allusers/' + clickedUserId + '/friend/' + currentUserId, null).success(
+        function(data){
+          console.log('data', data);
+        });
+    }
+   
+
+  };
 
   return userService;
 }]);

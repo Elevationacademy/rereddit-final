@@ -1,4 +1,4 @@
-app.controller('MainCtrl', ['$scope', 'posts', '$state',function($scope, posts, $state){
+app.controller('MainCtrl', ['$scope', 'posts',function($scope, posts, $state){
   $scope.posts = posts.posts;
 
   $scope.addPost = function() {
@@ -17,8 +17,4 @@ app.controller('MainCtrl', ['$scope', 'posts', '$state',function($scope, posts, 
     posts.upvote(item);
   }
 
-  $scope.allUsersPage = function () {
-    console.log('allusers function')
-    $state.go('allusers');
-  }
 }]);
