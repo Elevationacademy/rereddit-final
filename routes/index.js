@@ -130,4 +130,13 @@ router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
   });
 });
 
+router.get('/allusers', function(req, res, next) {
+  User.find(function(err, users){
+    if(err){ return next(err); }
+
+    console.log('users', users);
+    res.json(users);
+  });
+});
+
 module.exports = router;

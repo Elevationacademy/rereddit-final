@@ -42,6 +42,17 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
         }
       }]
     })
+    .state('allusers', {
+      url: '/allusers',
+      templateUrl: '/templates/allusers.html',
+      controller: 'AllUsersCtrl',
+      resolve: {
+        postPromise: ['users', function(users){
+          
+          return users.getAll();
+        }]
+      }  
+    })
 
   $urlRouterProvider.otherwise('home');
 }]);
