@@ -130,4 +130,53 @@ router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
   });
 });
 
+router.get('/allusers', function(req, res, next) {
+  User.find(function(err, users){
+    if(err){ return next(err); }
+
+    console.log('users', users);
+    res.json(users);
+  });
+});
+
+
+// the particular user that made this post request, and the user that was clicked 
+
+router.param('user1', function(req, res, next, id) {
+  var query = User.findById(id);
+
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('can\'t find user')); }
+
+    req.user1 = user;
+    return next();
+  });
+});
+
+router.param('user2', function(req, res, next, id) {
+  var query = User.findById(id);
+
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('can\'t find user')); }
+
+    req.user2 = user;
+    return next();
+  });
+});
+
+router.put('/allusers/:user1/friend/:user2', function(req, res, next) {
+
+  req.user1.friends.push(req.user2);
+  req.user1.save();
+
+  req.user2.friends.push(req.user1);
+  req.user2.save();
+
+  res.end();
+
+});
+
+
 module.exports = router;

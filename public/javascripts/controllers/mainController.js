@@ -1,4 +1,4 @@
-app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
+app.controller('MainCtrl', ['$scope', 'posts',function($scope, posts, $state){
   $scope.posts = posts.posts;
 
   $scope.addPost = function() {
@@ -16,4 +16,5 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
   $scope.incrementUpvotes = function(item) {
     posts.upvote(item);
   }
+
 }]);

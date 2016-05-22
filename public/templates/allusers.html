@@ -1,0 +1,7 @@
+<h2>All Users</h2>
+
+<section ng-repeat="user in users">
+  <button ng-show="true" ng-click="addFriend(user._id)">Add Friend</button>
+  <button ng-hide="true">Remove Friend</button>
+  <div class="username-userpage">{{user.username}}</div>
+</section>
