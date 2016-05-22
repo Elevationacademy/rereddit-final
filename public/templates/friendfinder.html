@@ -1,13 +1,13 @@
 <h1>All Users</h1>
-<div ng-repeat="user in users | orderBy:'username'">
+<div ng-repeat="user in users | orderBy:'_id'">
   
-  <div ng-if="isNotSelf(user.username)" class = 'user-list-item'>  
-    <div ng-if="isFriend(user.username)">
+  <div ng-if="isNotSelf(user)" class = 'user-list-item'>  
+    <div ng-if="isFriend(user)">
       <button type="button" class="btn btn-danger">Remove Friend</button> {{user.username}}
     </div>
 
-    <div ng-if="isFriend(user.username) == false">
-      <button  type="button" class="btn btn-primary">Add Friend</button> {{user.username}}
+    <div ng-if="isFriend(user) == false">
+      <button ng-click = "addFriend(user)" type="button" class="btn btn-primary">Add Friend</button> {{user.username}}
     </div>
   </div>
 

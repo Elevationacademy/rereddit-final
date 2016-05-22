@@ -6,7 +6,6 @@ app.controller('FriendFinderCtrl', ['$scope', 'auth','users', function($scope, a
 
   $scope.isFriend = function(friendName){
   	
-
   	if(cu.friends.indexOf(friendName) > -1){
   		return true
   	}
@@ -19,6 +18,11 @@ app.controller('FriendFinderCtrl', ['$scope', 'auth','users', function($scope, a
   		return true;
   	}
   	return false;
+  }
+
+  $scope.addFriend = function(friend){
+  	console.log("in add friend")
+  	users.addFriend(cu._id, friend);	
   }
 
 }]);
