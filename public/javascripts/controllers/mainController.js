@@ -11,9 +11,9 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
 
     $scope.title = '';
     $scope.link = '';
-  }
+  };
 
   $scope.incrementUpvotes = function(item) {
     posts.upvote(item);
-  }
+  };
 }]);

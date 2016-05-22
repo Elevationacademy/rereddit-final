@@ -45,6 +45,12 @@ app.factory('auth', ['$http', '$window', function($http, $window){
    auth.logOut = function(){
      $window.localStorage.removeItem('rereddit-jwt');
    };
+  
+   auth.addFriend = function (currentUser, userToAdd) {
+     return $http.put('/users/' + currentUser._id + '/friends/' + userToAdd._id);
+     // return $http.put('/users/' + currentUser._id);
+   };
+
 
   return auth;
 }]);
