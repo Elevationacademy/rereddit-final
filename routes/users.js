@@ -28,4 +28,12 @@ router.post('/:id/addFriend', function (req, res, next) {
   });
 });
 
+router.get('/getAll', function (req, res, next) {
+  User.find(function (err, users) {
+    if (err) return next(err);
+
+    res.send(users);
+  });
+})
+
 module.exports = router;

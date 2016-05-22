@@ -1,0 +1,9 @@
+<ul class="list-unstyled">
+  <li ng-repeat="user in users" ng-show="user._id !== currentUser._id">
+    <span ng-switch="isFriend(user._id)">
+      <button class="btn btn-primary" ng-switch-when="false">Add friend</button>
+      <button class="btn btn-danger" ng-switch-when="true">Remove Friend</button>
+    </span>
+    {{user.username}}
+  </li>
+</ul>
