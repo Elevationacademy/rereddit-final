@@ -42,6 +42,16 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
         }
       }]
     })
+    .state('users', {
+      url: '/users',
+      templateUrl: '/templates/users.html',
+      controller: 'UsersCtrl',
+      onEnter: ['$state', 'auth', function($state, auth){
+        if(auth.isLoggedIn()){
+          $state.go('home');
+        }
+      }]
+    })
 
   $urlRouterProvider.otherwise('home');
 }]);
