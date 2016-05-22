@@ -39,8 +39,6 @@ app.factory('users', ['$http', 'auth', function($http, auth) {
     //   });
     // }
   };
-  console.log(usersService.users);
-  console.log(usersService);
   
   return usersService;
 }]);
