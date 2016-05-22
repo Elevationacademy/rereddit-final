@@ -130,4 +130,8 @@ router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
   });
 });
 
+router.get('/allusers', function(req, res, next) {
+
+});
+
 module.exports = router;
