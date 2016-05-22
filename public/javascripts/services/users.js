@@ -14,7 +14,13 @@ app.factory('users', ['$http', function($http) {
       return $http.get('/users/' + id).then(function(res){
         return res.data;
       });
-    }
+    },
+
+    addFriend: function(currentUserId, friend){
+      console.log("in service add friend");
+      return $http.put('/users/' + currentUserId, friend);
+    },
+
   };
 
   return userservice;

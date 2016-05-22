@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new mongoose.Schema({
   username: { type: String, lowercase: true, unique: true },
-  friends: [],
+  friends: [{type: Schema.ObjectId, ref: 'User'}],
   hash: String,
   salt: String
 });
