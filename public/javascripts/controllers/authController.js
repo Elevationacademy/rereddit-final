@@ -14,9 +14,4 @@ app.controller('AuthCtrl', ['$scope', '$state', 'auth', function($scope, $state,
       $state.go('home');
     });
   };
-
-  // $scope.addFriend = function () {
-  //   auth.addFriend($scope.user);
-  // };
-
-}])
+}]);

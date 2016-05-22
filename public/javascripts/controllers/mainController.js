@@ -1,5 +1,6 @@
 app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
   $scope.posts = posts.posts;
+  // console.log($scope.posts);
 
   $scope.addPost = function() {
     if ($scope.title === '') { return; }

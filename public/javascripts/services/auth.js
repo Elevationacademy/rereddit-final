@@ -46,11 +46,5 @@ app.factory('auth', ['$http', '$window', function($http, $window){
      $window.localStorage.removeItem('rereddit-jwt');
    };
   
-   auth.addFriend = function (currentUser, userToAdd) {
-     return $http.put('/users/' + currentUser._id, userToAdd);
-     // return $http.put('/users/' + currentUser._id);
-   };
-
-
   return auth;
 }]);

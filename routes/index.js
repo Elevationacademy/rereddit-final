@@ -170,4 +170,12 @@ router.put('/users/:currentUser/friends/:friend2Add/', function (req, res, next)
   res.end();
 });
 
+router.get('/users', function (req, res, next) {
+  User.find(function(err, users){
+    if(err){ return next(err); }
+
+    res.json(users);
+  });  
+});
+
 module.exports = router;
