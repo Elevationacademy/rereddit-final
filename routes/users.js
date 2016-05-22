@@ -15,6 +15,13 @@ router.param('user', function(req, res, next, id) {
   });
 });
 
+router.get('/', function(req, res, next) {
+  User.find(function(err, users){
+    if(err){ return next(err); }
+    res.json(users);
+  });
+});
+
 router.put('/:user/addfriend', function(req, res, next) {
   friend = req.body.friend;
   // if(!friend){

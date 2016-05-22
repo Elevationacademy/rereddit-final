@@ -46,11 +46,11 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       url: '/users',
       templateUrl: '/templates/users.html',
       controller: 'UsersCtrl',
-      onEnter: ['$state', 'auth', function($state, auth){
-        if(auth.isLoggedIn()){
-          $state.go('home');
-        }
-      }]
+      resolve: {
+        usersPromise: ['users', function(users){
+          return users.getAll();
+        }]
+      }
     })
 
   $urlRouterProvider.otherwise('home');
