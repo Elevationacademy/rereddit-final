@@ -1,0 +1,7 @@
+<h3>All Users</h3>
+<div ng-repeat="user in users">
+{{user.username}}
+  <button class="btn btn-danger" ng-show="isFriend($index)">Remove Friend</button> 
+  <button class="btn btn-primary" ng-show="!isFriend($index)">Add Friend</button> 
+</div>
+

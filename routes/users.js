@@ -15,14 +15,16 @@ router.param('user', function(req, res, next, id) {
   });
 });
 
+router.get('/', function(req, res, next) {
+  User.find(function(err, users){
+    if(err){ return next(err); }
+    res.json(users);
+  });
+});
+
 router.put('/:user/addfriend', function(req, res, next) {
   friend = req.body.friend;
-  // if(!friend){
-    // req.user.friends.push(friend);
-
-    // req.user.save(function(err, user) {
-    //   res.json(user);
-    // });
+  if(!friend) {
 
       var newFriend = User.findById(friend, function (err, newfriend) {
           req.user.friends.push(friend);
@@ -39,12 +41,10 @@ router.put('/:user/addfriend', function(req, res, next) {
         res.end();
       });
 
-
     });
-  // } 
-  // else {
-  //   return res.status(400).json({message: 'User is already a friend!'});
-  // }
+  } else {
+    return res.status(400).json({message: 'User is already a friend!'});
+  }
 });
 
 module.exports = router;
