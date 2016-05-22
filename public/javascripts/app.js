@@ -42,6 +42,17 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
         }
       }]
     })
+    .state('users', {
+      url: '/users',
+      templateUrl: '/templates/users.html',
+      controller: 'UsersCtrl',
+      resolve: {
+        userPromise: ['users', function (users) {
+          console.log(users);
+          return users.getAll();
+        }]
+      }
+    })
 
   $urlRouterProvider.otherwise('home');
 }]);

@@ -89,6 +89,31 @@ router.param('comment', function(req, res, next, id) {
   });
 });
 
+router.param('currentUser', function (req, res, next, id) {
+  var query = User.findById(id);
+
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('can\'t find user')); }
+
+    req.currentUser = user;
+    return next();
+  });
+});
+
+router.param('friend2Add', function (req, res, next, id) {
+  var query = User.findById(id);
+
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('can\'t find user')); }
+
+    req.friend2Add = user;
+    return next();
+  });
+});
+
+
 router.post('/posts/:post/comments', function(req, res, next) {
   var comment = new Comment(req.body);
   comment.post = req.post;
@@ -116,7 +141,7 @@ router.get('/posts/:post', function(req, res, next) {
 router.put('/posts/:post/upvote', function(req, res, next) {
   req.post.upvote();
 
-
+  console.log(req.params);
   req.post.save(function(err, post) {
     res.json(post);
   });
@@ -128,6 +153,29 @@ router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
   req.comment.save(function(err, comment) {
     res.json(comment);
   });
+});
+
+router.put('/users/:currentUser/friends/:friend2Add/', function (req, res, next) {
+  // req.params
+  console.log(req.params, req.currentUser, req.body);
+  // console.log('1');
+  req.currentUser.friends.push(req.params.friend2Add);
+  req.friend2Add.friends.push(req.params.currentUser);
+
+  req.currentUser.save()
+    // res.json(user);
+
+  req.friend2Add.save()
+    // res.json(user);
+  res.end();
+});
+
+router.get('/users', function (req, res, next) {
+  User.find(function(err, users){
+    if(err){ return next(err); }
+
+    res.json(users);
+  });  
 });
 
 module.exports = router;
