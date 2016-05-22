@@ -17,5 +17,9 @@ app.controller('UsersCtrl', ['$scope', 'usersServ', 'auth', function ($scope, us
     usersServ.addFriend($scope.currentUser._id, id);
   }
 
+  $scope.removeFriend = function (id) {
+    usersServ.removeFriend($scope.currentUser._id, id);
+  }
+
 
 }])

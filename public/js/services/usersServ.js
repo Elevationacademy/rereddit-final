@@ -25,6 +25,15 @@ app.factory('usersServ', ['$http', function ($http) {
       }, function (err) {
         console.log(err);
       });
+    },
+
+    removeFriend: function (currentUserId, friendId) {
+      $http.put('/users/' + currentUserId + '/removeFriend', {id: friendId}).then(function () {
+        var idx = UsersServ.friends.indexOf(friendId);
+        UsersServ.friends.splice(idx, 1);
+      }, function (err) {
+        console.log(err);
+      });
     }
 
   };

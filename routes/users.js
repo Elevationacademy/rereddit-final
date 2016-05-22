@@ -40,6 +40,32 @@ router.get('/getAll', function (req, res, next) {
 
     res.send(users);
   });
-})
+});
+
+router.put('/:id/removeFriend', function (req, res, next) {
+  User.findById(req.params.id, function (err, user) {
+    if (err) return next(err);
+
+    var idx = user.friends.indexOf(req.body.id);
+    user.friends.splice(idx, 1);
+
+    user.save(function (err, user) {
+      if (err) return next(err);
+      
+      User.findById(req.body.id, function (err, user) {
+        if (err) return next(err);
+
+        idx = user.friends.indexOf(req.params.id);
+        user.friends.splice(idx, 1);
+
+        user.save(function (err, user) {
+          if (err) return next(err);
+
+          res.send(user);
+        })
+      });
+    });
+  });
+});
 
 module.exports = router;

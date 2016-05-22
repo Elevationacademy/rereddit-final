@@ -2,7 +2,7 @@
   <li ng-repeat="user in users" ng-show="user._id !== currentUser._id">
     <span ng-switch="isFriend(user._id)">
       <button class="btn btn-primary" ng-switch-when="false" ng-click="addFriend(user._id)">Add friend</button>
-      <button class="btn btn-danger" ng-switch-when="true">Remove Friend</button>
+      <button class="btn btn-danger" ng-switch-when="true" ng-click="removeFriend(user._id)">Remove Friend</button>
     </span>
     {{user.username}}
   </li>
