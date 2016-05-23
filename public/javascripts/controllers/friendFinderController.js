@@ -4,7 +4,26 @@ app.controller('FriendFinderCtrl', ['$scope', 'auth','users', function($scope, a
   $scope.users = users.users;
   var cu = auth.currentUser();
 
-  console.log(cu);
+  $scope.userStatus = auth.isLoggedIn();
+  $scope.cu = cu;
+
+  $scope.friends = $scope.cu.friends;
+
+  $scope.amigos = [];
+
+  //finding the friends
+  $scope.renderFriends = function() {
+    // console.log('hey')
+    for (var i =0; i < $scope.friends.length; i++) {
+      for(var j= 0; j < $scope.users.length; j++){
+        if ($scope.friends[i] === $scope.users[j]._id){
+        console.log($scope.users[j].username)
+        $scope.amigos.push($scope.users[j].username);
+        // console.log($scope.amigos)
+        } //if
+      }//2nd for
+    }//1st for
+  }
 
   $scope.isFriend = function(friend){
   

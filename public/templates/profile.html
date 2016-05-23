@@ -1,0 +1,13 @@
+<h1 ng-show="userStatus"><strong> Friends of {{ cu.username }}</strong></h1>
+
+<button class="btn btn-primary" ng-click="renderFriends()">Show friends</button>
+<div ng-repeat="friend in amigos | orderBy:'_id'">
+  
+  <div class = 'user-list-item'>  
+    <div>
+     {{friend}}
+    </div>
+  </div>
+
+</div>
+
