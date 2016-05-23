@@ -30,6 +30,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" ng-show="isLoggedIn()"><strong>{{ currentUser().username }}</strong> <span class="caret"></span></a>
             <ul class="dropdown-menu">
+              <li ng-show="isLoggedIn()"><a href="/#/profile">Profile</a></li>
               <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
               <!-- <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li> -->
             </ul>
@@ -58,6 +59,7 @@
   <script src="javascripts/controllers/postsController.js"></script>
   <script src="javascripts/controllers/navController.js"></script>
   <script src="javascripts/controllers/usersController.js"></script>
+  <script src="javascripts/controllers/profileController.js"></script>
 
 </body>
 </html>

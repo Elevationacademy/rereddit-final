@@ -138,6 +138,14 @@ router.get('/posts/:post', function(req, res, next) {
   });
 });
 
+// router.get('/users/:currentUser', function (req, res, next) {
+//   req.currentUser.populate('users', function (err, user) {
+//     if(err) { return next(err); }
+
+//     res.json(user);
+//   });
+// });
+
 router.put('/posts/:post/upvote', function(req, res, next) {
   req.post.upvote();
 

@@ -7,6 +7,13 @@ app.factory('users', ['$http', '$window', function ($http, $window) {
     });
   };
 
+  // users.get = function (id) {
+  //   // console.log('1');
+  //   return $http.get('/users/' + id).then(function(res){
+  //     return res.data;
+  //   });
+  // };
+
    users.addFriend = function (currentUser, friend2Add) {
      // return $http.put('/users/' + currentUser._id, userToAdd);
      return $http.put('/users/' + currentUser._id + '/friends/' + friend2Add._id).success(function(data) {
