@@ -5,7 +5,8 @@ var jwt = require('jsonwebtoken');
 var UserSchema = new mongoose.Schema({
   username: { type: String, lowercase: true, unique: true },
   hash: String,
-  salt: String
+  salt: String,
+  friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 });
 
 UserSchema.methods.setPassword = function(password){
@@ -32,6 +33,10 @@ UserSchema.methods.generateJWT = function() {
     exp: parseInt(exp.getTime() / 1000),
   }, 'myLittleSecret');
 };
+
+// UserSchema.methods.addFriend = function (user) {
+//   this.friends.push(user);
+// };
 
 var User = mongoose.model('User', UserSchema);
 

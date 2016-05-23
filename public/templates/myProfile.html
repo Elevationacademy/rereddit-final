@@ -1,0 +1,11 @@
+<div class="page-header">
+  <a href="/#/users">back</a>
+  <h1>Hello {{currentUser.username}}, here's a list of your friends</h1>
+  <ul ng-repeat="friend in currentUser.friends">
+    <li>{{findUserById(friend)}}</li>
+  </ul>
+</div>
+
+
+
+

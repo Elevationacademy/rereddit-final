@@ -42,6 +42,45 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
         }
       }]
     })
+    .state('users', {
+      url: '/users',
+      templateUrl: '/templates/users.html',
+      controller: 'UsersCtrl',
+      resolve: {
+        userPromise: ['users', function (users) {
+          // console.log(users);
+          return users.getAll();
+        }]
+      }
+    })
+    .state('profile', {
+      url: '/profile/:id',
+      templateUrl: 'templates/profile.html',
+      controller: 'UsersCtrl',
+      resolve: {
+        userPromise: ['users', function (users) {
+          // console.log(users);
+          return users.getAll();
+        }]
+      }
+    })
+    .state('myProfile', {
+      url: '/profile',
+      templateUrl: 'templates/myProfile.html',
+      controller: 'UsersCtrl',
+      resolve: {
+        userPromise: ['users', function (users) {
+          // console.log(users);
+          return users.getAll();
+        }]        
+      }
+    })
+    //   resolve: {
+    //     user: ['$stateParams', 'users', function ($stateParams, users) {
+    //       return users.get($stateParams.id);
+    //     }]
+    //   }
+    // })
 
   $urlRouterProvider.otherwise('home');
 }]);
