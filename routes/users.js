@@ -24,27 +24,30 @@ router.get('/', function(req, res, next) {
 
 router.put('/:user/addfriend', function(req, res, next) {
   friend = req.body.friend;
-  if(!friend) {
+  var friendsArr = req.user.friends;
 
+  var duplicate = friendsArr.indexOf(friend);
+
+  if (duplicate > -1) {
+    return res.status(400).json({message: 'User is already a friend!'});
+  } else {
       var newFriend = User.findById(friend, function (err, newfriend) {
           req.user.friends.push(friend);
 
           newfriend.friends.push(req.user._id);
 
-          console.log(newfriend.friends);
+          req.user.save(function(err, user) { 
+            res.json(user);
+          });
 
-      req.user.save(function(err, user) {
-        res.json(user);
+          newfriend.save(function(err, newfriend) {
+            res.end();
+          });
+
       });
+  };
+ 
 
-      newfriend.save(function(err, newfriend) {
-        res.end();
-      });
-
-    });
-  } else {
-    return res.status(400).json({message: 'User is already a friend!'});
-  }
 });
 
 module.exports = router;
