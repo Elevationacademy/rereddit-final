@@ -4,12 +4,15 @@ app.controller('UsersCtrl', ['$scope', 'users', 'auth', function($scope, users, 
   console.log($scope.users);
   $currentUser = auth.currentUser();
 
-  $scope.addFriend = function () {
-    // TODO
+  $scope.addFriend = function (user) {
+   users.addFriend($currentUser);
+   console.log(user);
+
+
   };
 
   $scope.removeFriend = function () {
-    // TODO
+    console.log("remove");
   };
 
   $scope.isFriend = function ($index) {
