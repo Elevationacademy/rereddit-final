@@ -53,6 +53,15 @@ router.get('/posts', function(req, res, next) {
   });
 });
 
+//get users
+router.get('/users', function(req, res, next) {
+  User.find(function(err, users){
+    if(err){ return next(err); }
+
+    res.json(users);
+  });
+});
+
 router.post('/posts', auth, function(req, res, next) {
   var post = new Post(req.body);
 
@@ -73,6 +82,19 @@ router.param('post', function(req, res, next, id) {
     if (!post) { return next(new Error('can\'t find post')); }
 
     req.post = post;
+    return next();
+  });
+});
+
+//param for find the specific user to add friends to it
+router.param('user', function(req, res, next, id) {
+  var query = User.findById(id);
+
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('can\'t find user')); }
+
+    req.user = user;
     return next();
   });
 });
@@ -105,11 +127,37 @@ router.post('/posts/:post/comments', function(req, res, next) {
   });
 });
 
+//post friends
+router.put('/users/:user/', function(req, res, next) {
+
+  var friendUser = new User(req.body);
+
+  req.user.friends.push(friendUser);
+  req.body.friends.push(req.user);
+
+  friendUser.save();
+  req.user.save();
+  res.end();
+
+});
+
+
+
+
 router.get('/posts/:post', function(req, res, next) {
   req.post.populate('comments', function(err, post) {
     if (err) { return next(err); }
 
     res.json(post);
+  });
+});
+
+//populate user with friends 
+router.get('/users/:user', function(req, res, next) {
+  req.user.populate('friends', function(err, user) {
+    if (err) { return next(err); }
+
+    res.json(user);
   });
 });
 

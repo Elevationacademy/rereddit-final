@@ -42,6 +42,26 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
         }
       }]
     })
+    .state('friendfinder',{
+      url:'/friendfinder',
+      templateUrl: '/templates/friendfinder.html',
+      controller: 'FriendFinderCtrl',
+      resolve:{
+        postPromise:['users', function(users){
+          return users.getAll();
+        }]
+      }
+    })
+    .state('profile',{
+      url:'/profile',
+      templateUrl: '/templates/profile.html',
+      controller: 'FriendFinderCtrl',
+      resolve:{
+        postPromise:['users', function(users){
+          return users.getAll();
+        }]
+      }
+    })
 
   $urlRouterProvider.otherwise('home');
 }]);
