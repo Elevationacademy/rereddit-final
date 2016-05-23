@@ -1,13 +1,21 @@
 app.factory('usersServ', ['$http', function ($http) {
   var UsersServ = {
+    user: {},
     users: [],
     friends: [],
+
+
+    getUser: function (id) {
+      $http.get('/users/user/' + id).then(function (data) {
+        angular.copy(data.data, UsersServ.user);
+      });
+    },
 
     getUsers: function () {
       $http.get('/users/getAll').then(function (data) {
         angular.copy(data.data, UsersServ.users);
       }, function (err) {
-        console.log(err);
+        console.error(err);
       });
     },
 
@@ -39,4 +47,4 @@ app.factory('usersServ', ['$http', function ($http) {
   };
 
   return UsersServ;
-}])
+}]);

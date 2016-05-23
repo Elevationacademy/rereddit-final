@@ -2,6 +2,7 @@ app.controller('UsersCtrl', ['$scope', 'usersServ', 'auth', function ($scope, us
   $scope.users = usersServ.users;
   $scope.currentUser = auth.currentUser();
   $scope.friends = usersServ.friends;
+  $scope.user = usersServ.user;
 
   $scope.isFriend = function (id) {
     for (let i = 0; i < $scope.friends.length; i++) {
@@ -19,6 +20,10 @@ app.controller('UsersCtrl', ['$scope', 'usersServ', 'auth', function ($scope, us
 
   $scope.removeFriend = function (id) {
     usersServ.removeFriend($scope.currentUser._id, id);
+  }
+
+  $scope.getUserInfo = function (id) {
+    usersServ.getUser(id);
   }
 
 

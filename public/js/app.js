@@ -42,6 +42,17 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
         }
       }]
     })
+    .state('profile', {
+      url: '/profile/:id',
+      templateUrl: '/templates/profile.html',
+      controller: 'UsersCtrl',
+      resolve: {
+        userPromise: ['$stateParams', 'usersServ', 'auth', function ($stateParams, usersServ, auth) {
+          usersServ.getUser($stateParams.id);
+          // usersServ.getFriends($stateParams.id);
+        }]
+      }
+    })
     .state('users', {
       url: '/users',
       templateUrl: '/templates/users.html',
@@ -54,5 +65,5 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       }
     });
 
-  $urlRouterProvider.otherwise('users');
+  $urlRouterProvider.otherwise('home');
 }]);

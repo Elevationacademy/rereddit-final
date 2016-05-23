@@ -5,5 +5,6 @@
       <button class="btn btn-danger" ng-switch-when="true" ng-click="removeFriend(user._id)">Remove Friend</button>
     </span>
     {{user.username}}
+    <a ui-sref="profile({id: user._id})">Profile</a>
   </li>
 </ul>
