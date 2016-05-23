@@ -2,7 +2,7 @@ app.controller('UsersCtrl', ['$scope', 'users', 'auth', function($scope, users, 
   // users.getAll();
   $scope.users = users.users;
   $currentUser = auth.currentUser();
-
+  
   $scope.addFriend = function (friend) {
    users.addFriend($currentUser, friend);
 

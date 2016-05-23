@@ -4,18 +4,33 @@ app.factory('users', ['$http', 'auth', function($http, auth) {
 
 
     getAll: function() {
+      console.log('get all');
       return $http.get('/users').then(function(data) {
         angular.copy(data.data, usersService.users);
       });
     },
 
     addFriend: function(currentUser, friend){
-        console.log(currentUser._id);
         var friend = {friend: friend._id};
-        console.log(friend);
 
 
-        return $http.put('/users/' + currentUser._id +'/addfriend', friend);
+        return $http.put('/users/' + currentUser._id +'/addfriend', friend).then(function(result){
+            console.log(currentUser);
+            console.log(result.data);
+            
+
+            for (var i = 0; usersService.users.length; i++) {
+                if (usersService.users[i]._id === result.data._id){
+                    angular.extend(usersService.users[i], result.data)
+                    console.log(usersService.users[i]);
+                    return
+
+                } else {
+                    console.log("Fuck You"+[i]);
+                }
+            }
+            // $scope.isFriend();
+        });
 
         // .then(function(result){
         //     console.log(result.data);
