@@ -9,6 +9,21 @@ app.factory('users', ['$http', 'auth', function($http, auth) {
       });
     },
 
+    addFriend: function(currentUser, friend){
+        console.log(currentUser._id);
+        var friend = {friend: friend._id};
+        console.log(friend);
+
+
+        return $http.put('/users/' + currentUser._id +'/addfriend', friend);
+
+        // .then(function(result){
+        //     console.log(result.data);
+        //     console.log(result);
+        //     return result.data
+        // });
+    }
+
     // get: function(id) {
     //   return $http.get('/users/' + id).then(function(res){
     //     return res.data;
