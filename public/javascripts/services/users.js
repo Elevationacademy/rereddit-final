@@ -11,30 +11,21 @@ app.factory('users', ['$http', 'auth', function($http, auth) {
     },
 
     addFriend: function(currentUser, friend){
-        var friend1 = {friend: friend._id};
+        var friend = {friend: friend._id};
 
 
-        return $http.put('/users/' + currentUser._id +'/addfriend', friend1).success(function(data){
+        return $http.put('/users/' + currentUser._id +'/addfriend', friend).success(function(data){
 
         });
+    },
 
-            // for (var i = 0; usersService.users.length; i++) {
-            //     if (usersService.users[i]._id === result.data._id){
-            //         angular.extend(usersService.users[i], result.data)
-            //         console.log(usersService.users[i]);
-            //         return
+    deleteFriend: function(currentUser, friend){
+        var friend = {friend:friend._id};
+        return $http.put('/users/' + currentUser._id +'/deletefriend', friend).success(function(data){
 
-            //     } else {
-            //         console.log("Fuck You"+[i]);
-            //     }
-            // }
-            // $scope.isFriend();
+        });
+        
 
-        // .then(function(result){
-        //     console.log(result.data);
-        //     console.log(result);
-        //     return result.data
-        // });
     }
 
     // get: function(id) {

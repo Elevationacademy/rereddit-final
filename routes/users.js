@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.put('/:user/addfriend', function(req, res, next) {
-  friend = req.body.friend;
+  var friend = req.body.friend;
   var friendsArr = req.user.friends;
 
   var duplicate = friendsArr.indexOf(friend);
@@ -46,7 +46,28 @@ router.put('/:user/addfriend', function(req, res, next) {
 
       });
   };
- 
+});
+
+router.put('/:user/deletefriend', function(req, res, next){
+
+    var index = req.user.friends.indexOf(req.body.friend);
+
+    req.user.friends.splice(index,1);
+
+    req.user.save(function(err, user) { 
+        res.json(user);
+    });
+
+    var removeFromFriend = User.findById(req.body.friend, function(err, friend){
+      var indexFriend = req.user.friends.indexOf(req.body.friend);
+      friend.friends.splice(indexFriend,1);
+
+    friend.save(function(err, friend){
+      res.end();
+    });
+
+
+    });
 
 });
 

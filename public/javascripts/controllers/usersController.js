@@ -15,29 +15,36 @@ app.controller('UsersCtrl', ['$scope', 'users', 'auth', function($scope, users, 
 
   $scope.addFriend = function (friend) {
    users.addFriend($scope.currentUser, friend).then(function(result){
-
             $scope.currentUser.friends.push(friend._id);
-            
-            friend.friends.push($scope.currentUser._id);
-            console.log($scope.currentUser.friends);   
+            friend.friends.push($scope.currentUser._id);  
           });   
+   console.log("add"); 
+   console.log($scope.users); 
 
   };
 
-  $scope.removeFriend = function () {
-    console.log("remove");
+  $scope.removeFriend = function (friend, $index) {
+    users.deleteFriend($scope.currentUser, friend).then(function(result){
+      var user = $scope.currentUser;
+      var indexUser = user.friends.indexOf(friend._id);
+      
+      user.friends.splice(indexUser,1);
+      
+      var indexFriend = friend.friends.indexOf(user._id);
+      
+      friend.friends.splice(indexFriend,1);
+      console.log("remove"); 
+      console.log($scope.users); 
+    });
   };
 
   $scope.isFriend = function (user) {
     for (var i = 0; i < $scope.currentUser.friends.length; i++) {
       if (user._id === $scope.currentUser.friends[i]) {
-        // $scope.users[$index]._id is the friend that we're comparing to the currentUser's friends array to verify if it's a friend already.
+
         return true
       } 
-      return false
     }
-    // console.log($currentUser._id);
-    // console.log($currentUser.friends); // Loop through
   };
 
 }]);
