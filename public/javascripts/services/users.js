@@ -4,24 +4,28 @@ app.factory('users', ['$http', 'auth', function($http, auth) {
 
 
     getAll: function() {
+      console.log('get all');
       return $http.get('/users').then(function(data) {
         angular.copy(data.data, usersService.users);
       });
     },
 
     addFriend: function(currentUser, friend){
-        console.log(currentUser._id);
         var friend = {friend: friend._id};
-        console.log(friend);
 
 
-        return $http.put('/users/' + currentUser._id +'/addfriend', friend);
+        return $http.put('/users/' + currentUser._id +'/addfriend', friend).success(function(data){
 
-        // .then(function(result){
-        //     console.log(result.data);
-        //     console.log(result);
-        //     return result.data
-        // });
+        });
+    },
+
+    deleteFriend: function(currentUser, friend){
+        var friend = {friend:friend._id};
+        return $http.put('/users/' + currentUser._id +'/deletefriend', friend).success(function(data){
+
+        });
+        
+
     }
 
     // get: function(id) {
