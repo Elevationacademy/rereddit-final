@@ -18,7 +18,6 @@ app.controller('UsersCtrl', ['$scope', 'users', 'auth', function($scope, users, 
             $scope.currentUser.friends.push(friend._id);
             friend.friends.push($scope.currentUser._id);  
           });   
-   console.log("add"); 
    console.log($scope.users); 
 
   };
@@ -33,8 +32,6 @@ app.controller('UsersCtrl', ['$scope', 'users', 'auth', function($scope, users, 
       var indexFriend = friend.friends.indexOf(user._id);
       
       friend.friends.splice(indexFriend,1);
-      console.log("remove"); 
-      console.log($scope.users); 
     });
   };
 
