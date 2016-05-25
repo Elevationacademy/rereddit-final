@@ -6,18 +6,18 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     exec = require('child_process').exec;
 
-gulp.task('server', function (cb) {
-  exec('mongod', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-  exec('node ./server.js', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-});
+// gulp.task('server', function (cb) {
+//   exec('mongod', function (err, stdout, stderr) {
+//     console.log(stdout);
+//     console.log(stderr);
+//     cb(err);
+//   });
+//   exec('node ./server.js', function (err, stdout, stderr) {
+//     console.log(stdout);
+//     console.log(stderr);
+//     cb(err);
+//   });
+// });
 
 gulp.task('watch', function () {
   // livereload.listen();
@@ -42,4 +42,4 @@ gulp.task('browserify', function() {
 });
 
 // gulp.task('default', ['install', 'watch', 'browserify', 'server']);
-gulp.task('default', ['install', 'server']);
+// gulp.task('default', ['install', 'server']);
