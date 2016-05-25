@@ -51,7 +51,22 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
           // console.log(users);
           return users.getAll();
         }]
-      }
+      },
+      // onEnter: ['$state', 'auth', function($state, auth){
+      //   console.log('1');
+      //   if(!auth.isLoggedIn()){
+      //     $state.go('home');
+      //   }
+      // }]
+      onEnter: ['$state', 'auth', '$timeout', function($state, auth, $timeout){
+        console.log('1');
+        if(!auth.isLoggedIn()){
+          $timeout(function () {
+            $state.go('home');
+          },50);
+        }
+      }]
+
     })
     .state('profile', {
       url: '/profile/:id',
@@ -62,10 +77,15 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
           // console.log(users);
           return users.getAll();
         }]
-      }
+      },
+      onEnter: ['$state', 'auth', function($state, auth){
+        if(!auth.isLoggedIn()){
+          $state.go('home');
+        }
+      }]
     })
     .state('myProfile', {
-      url: '/profile',
+      url: '/myProfile',
       templateUrl: 'templates/myProfile.html',
       controller: 'UsersCtrl',
       resolve: {
@@ -73,7 +93,12 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
           // console.log(users);
           return users.getAll();
         }]        
-      }
+      },
+      onEnter: ['$state', 'auth', function($state, auth){
+        if(!auth.isLoggedIn()){
+          $state.go('home');
+        }
+      }]
     })
     //   resolve: {
     //     user: ['$stateParams', 'users', function ($stateParams, users) {
