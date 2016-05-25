@@ -5,6 +5,8 @@ var jwt = require('jsonwebtoken');
 var UserSchema = new mongoose.Schema({
   username: { type: String, lowercase: true, unique: true },
   friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  sentReq: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  requests: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   hash: String,
   salt: String
 });
