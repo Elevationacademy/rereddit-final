@@ -6,8 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var port = normalizePort(process.env.PORT || '8080');
 
-mongoose.connect('mongodb://localhost/rereddit-dev');
+mongoose.connect(process.env.MONGOLAB_CYAN_URI || 'mongodb://localhost/rereddit-dev');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -61,6 +62,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(8080);
+app.listen(port);
 
 module.exports = app;

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp"
   },
   "dependencies": {
     "angular": "^1.5.5",
