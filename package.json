@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "gulp"
+    
   },
   "dependencies": {
     "browserify": "^13.0.1",
