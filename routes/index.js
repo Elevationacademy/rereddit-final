@@ -178,5 +178,21 @@ router.put('/allusers/:user1/friend/:user2', function(req, res, next) {
 
 });
 
+router.put('/allusers/:user1/removed/:user2', function(req, res){
+
+  if ( req.user1.friends )
+    req.user1.friends.splice();
+    req.user1.save();
+
+    req.user2.friends.splice();
+    req.user2.save();
+
+ 
+
+
+  res.end();
+
+});
+
 
 module.exports = router;

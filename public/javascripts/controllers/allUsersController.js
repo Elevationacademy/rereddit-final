@@ -1,31 +1,43 @@
 app.controller('AllUsersCtrl', ['$scope', 'users', 'auth',  function($scope, users, auth){
 
   $scope.users = users.users;
-  // console.log($scope.users[0].friends);
-  $scope.currentUser = auth.currentUser();
-  console.log($scope.currentUser.friends);
+  
+  $scope.currentUser = function () {
+    for( var i = 0; i < $scope.users.length; i ++ ) {
 
-  $scope.addFriend = function (clickedUserId) {
-
-    users.addFriend(clickedUserId, $scope.currentUser._id);
-
+      if ( $scope.users[i]._id === auth.currentUser()._id ) {
+        return $scope.users[i];
+      }
+    }
   };
 
-  $scope.notFriend = function (friendId) {
+  $scope.isCurrentUser = function (userName) {
+    console.log(userName);
 
-    for (var i = 0; i < $scope.currentUser.friends; i ++) {
-      
-      if( $scope.currentUser.friends[i] === friendId){
-        console.log($scope.currentUser.friends[i]);
-        return false;
-      }
-
+    if ( $scope.currentUser().username === userName ) {
+      return true;
     }
 
   };
-
-  $scope.Friend = function () {
-
+  
+  $scope.addFriend = function (clickedUserId) {
+    users.addFriend(clickedUserId, $scope.currentUser()._id);
   };
+
+  $scope.removeFriend = function (clickedUserId) {
+    users.removeFriend(clickedUserId, $scope.currentUser()._id);
+  };
+
+  $scope.friend = function (friendId) {
+    for ( var i = 0; i < $scope.currentUser().friends.length; i ++ ){
+      if ( $scope.currentUser().friends[i] === friendId ) {
+        console.log('friend');
+        return false;
+      } 
+    }
+    console.log('hello');
+    return true;
+  };
+
   
 }]);

@@ -1,7 +1,9 @@
 <h2>All Users</h2>
+<section ng-repeat="user in users" ng-if="!isCurrentUser(user.username)">
 
-<section ng-repeat="user in users">
-  <button ng-show="notFriend(user._id)" ng-click="addFriend(user._id)">Add Friend</button>
-  <button ng-show="true">Remove Friend</button>
+  <button class="btn btn-success" ng-show="friend(user._id)" ng-click="addFriend(user._id)">Add Friend</button>
+  <button class=" btn btn-danger" ng-hide="friend(user._id)" ng-click="removeFriend(user._id)">Remove Friend</button>
   <div class="username-userpage">{{user.username}}</div>
+
 </section>
+
