@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var port = normalizePort(process.env.PORT || '8080');
+var port = process.env.PORT || '8080';
 
 mongoose.connect(process.env.MONGOLAB_CYAN_URI || 'mongodb://localhost/rereddit-dev');
 
