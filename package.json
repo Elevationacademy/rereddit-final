@@ -11,7 +11,7 @@
     "gulp-connect": "^4.0.0",
     "gulp-install": "^0.6.0",
     "gulp-livereload": "^3.8.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
     "angular": "^1.5.5",
     "angular-ui-router": "^0.2.18",
     "body-parser": "~1.13.2",
