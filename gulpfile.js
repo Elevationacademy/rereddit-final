@@ -42,4 +42,4 @@ gulp.task('browserify', function() {
 });
 
 // gulp.task('default', ['install', 'watch', 'browserify', 'server']);
-gulp.task('default', ['server']);
+gulp.task('default', ['install', 'server']);
