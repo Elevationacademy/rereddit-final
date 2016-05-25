@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var port = process.env.PORT || '8080';
 
-mongoose.connect(process.env.MONGOLAB_CYAN_URI || 'mongodb://localhost/rereddit-dev');
+mongoose.connect(process.env.MONGOLAB_IVORY_URI || 'mongodb://localhost/rereddit-dev');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
