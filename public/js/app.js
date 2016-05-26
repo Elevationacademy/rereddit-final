@@ -48,8 +48,8 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       controller: 'UsersCtrl',
       resolve: {
         userPromise: ['$stateParams', 'usersServ', 'auth', function ($stateParams, usersServ, auth) {
+          usersServ.getRequests(auth.currentUser()._id);
           usersServ.getUser($stateParams.id);
-          // usersServ.getFriends($stateParams.id);
         }]
       }
     })

@@ -7,11 +7,11 @@ var gulp = require('gulp'),
     exec = require('child_process').exec;
 
 gulp.task('server', function (cb) {
-  // exec('mongod', function (err, stdout, stderr) {
-  //   console.log(stdout);
-  //   console.log(stderr);
-  //   cb(err);
-  // });
+  exec('mongod', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
   exec('node server.js', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);

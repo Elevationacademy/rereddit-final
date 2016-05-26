@@ -1,5 +1,19 @@
 <p>{{user.username}}</p>
 
-<ul class="list-unstyled">
-  <li ng-repeat="friend in user.friends" >{{friend.username}}</li>
+<ul class="list-unstyled"  ng-hide="user.friends.length === 0">
+  <h4>Friends</h4>
+  <li ng-repeat="friend in user.friends" >
+    {{friend.username}}
+  </li>
+</ul>
+
+<ul class="list-unstyled" ng-show="isCurrentUser(user._id) && user.requests.length !== 0">
+  <h4>Request for friendship</h4>
+  <li ng-repeat="wantBeFriend in user.requests">
+    <span>
+      <button class="btn btn-success" ng-click="reqConfirm(wantBeFriend._id, true)">Yes</button>
+      <button class="btn btn-danger" ng-click="reqConfirm(wantBeFriend._id, false)">No</button>
+    </span>
+    {{wantBeFriend.username}}
+  </li>
 </ul>

@@ -7,8 +7,8 @@ var UserSchema = new mongoose.Schema({
   friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   sentReq: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
   requests: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-  hash: String,
-  salt: String
+  hash: {type: String, select: false},
+  salt: {type: String, select: false}
 });
 
 UserSchema.methods.setPassword = function(password){

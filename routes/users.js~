@@ -42,7 +42,7 @@ router.get('/:id/getFriends', function (req, res, next) {
 
 router.get('/:id/getRequests', function (req, res, next) {
   //sending info of what was found
-  res.send(req.currentUser.requests);
+  res.send(req.currentUser.friends);
 });
 
 router.post('/:id/reqFriendship', auth, function (req, res, next) {
