@@ -26,9 +26,12 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       url: '/login',
       templateUrl: '/templates/login.html',
       controller: 'AuthCtrl',
-      onEnter: ['$state', 'auth', function($state, auth){
+      onEnter: ['$state', 'auth', '$timeout', function($state, auth, $timeout){
+        // console.log('1');
         if(auth.isLoggedIn()){
-          $state.go('home');
+          $timeout(function () {
+            $state.go('home');
+          },50);
         }
       }]
     })
@@ -36,9 +39,12 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       url: '/register',
       templateUrl: '/templates/register.html',
       controller: 'AuthCtrl',
-      onEnter: ['$state', 'auth', function($state, auth){
+      onEnter: ['$state', 'auth', '$timeout', function($state, auth, $timeout){
+        // console.log('1');
         if(auth.isLoggedIn()){
-          $state.go('home');
+          $timeout(function () {
+            $state.go('home');
+          },50);
         }
       }]
     })
@@ -59,7 +65,7 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
       //   }
       // }]
       onEnter: ['$state', 'auth', '$timeout', function($state, auth, $timeout){
-        console.log('1');
+        // console.log('1');
         if(!auth.isLoggedIn()){
           $timeout(function () {
             $state.go('home');
@@ -78,9 +84,12 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
           return users.getAll();
         }]
       },
-      onEnter: ['$state', 'auth', function($state, auth){
+      onEnter: ['$state', 'auth', '$timeout', function($state, auth, $timeout){
+        // console.log('1');
         if(!auth.isLoggedIn()){
-          $state.go('home');
+          $timeout(function () {
+            $state.go('home');
+          },50);
         }
       }]
     })
@@ -92,11 +101,21 @@ app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $url
         userPromise: ['users', function (users) {
           // console.log(users);
           return users.getAll();
-        }]        
+        }]
+        // security: ['$q', 'auth', function ($q, auth) {
+        //   if(!auth.isLoggedIn()){
+        //     console.log('1', $q.reject);
+        //     // $state.go('home');
+        //     // return $q.reject("Not Authorized");
+        //   }
+        // }]
       },
-      onEnter: ['$state', 'auth', function($state, auth){
+      onEnter: ['$state', 'auth', '$timeout', function($state, auth, $timeout){
+        // console.log('1');
         if(!auth.isLoggedIn()){
-          $state.go('home');
+          $timeout(function () {
+            $state.go('home');
+          },50);
         }
       }]
     })

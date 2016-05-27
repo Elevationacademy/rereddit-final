@@ -2,9 +2,13 @@
   <div class="col-md-6 col-md-offset-3">
     <h1 class="text-center">All Users</h1>
     <div ng-repeat="user in users" ng-if="user.username != currentUser.username">
-      <button type="button" class="btn btn-danger" ng-show="addOrRemove(user)" ng-click="removeFriend(user)">Remove Friend</button>
-      <button type="button" class="btn btn-primary" ng-hide="addOrRemove(user)" ng-click="addFriend(user)">Add Friend</button>
+      <button type="button" class="btn btn-danger" ng-if="friendStatus(user) === 1" ng-click="removeFriend(user)">Remove Friend</button>
+      <button type="button" class="btn btn-primary" ng-if="friendStatus(user) === -1" ng-click="addFriend(user)">Add Friend</button>
+      <button type="button" class="btn btn-warning" ng-if="friendStatus(user) === 2" ng-click="cancelRequest(user)">Cancel Friend Request</button>
+      <button type="button" class="btn btn-success" ng-if="friendStatus(user) === 3" ng-click="confirmFriend(user)">Confirm Friend Request</button>
+      <button type="button" class="btn btn-danger" ng-if="friendStatus(user) === 3" ng-click="ignoreRequest(user)">Ignore</button>
       <a href="#/profile/{{user._id}}">{{user.username}}</a>
+      <!-- <h5 ng-if="friendStatus(user) === 2">Friend Request Sent</h5> -->
     </div>
   </div>
 </div>

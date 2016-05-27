@@ -30,7 +30,7 @@ app.factory('posts', ['$http', 'auth', function($http, auth) {
     },
 
     addComment: function(id, comment) {
-      return $http.post('/posts/' + id + '/comments', comment);
+      return $http.post('/posts/' + id + '/comments', comment, {headers: {Authorization: 'Bearer '+ auth.getToken()}});
     },
 
     upvoteComment: function(post, comment) {

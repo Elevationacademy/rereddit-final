@@ -21,20 +21,54 @@ app.controller('UsersCtrl', ['$scope', '$state', 'users', 'auth', function ($sco
     }
   }
   // console.log($scope.currentUser);
-  $scope.addOrRemove = function (user) {
+  $scope.friendStatus = function (user) {
     for (var i = 0; i < $scope.currentUser.friends.length; i++) {
       // console.log(user._id);
        // console.log($scope.currentUser.friends[i]);
       if (user._id === $scope.currentUser.friends[i]) {
-        return true;
+        return 1;
+      } 
+    }
+    for (i = 0; i < $scope.currentUser.requests.length; i++) {
+      if (user._id === $scope.currentUser.requests[i]) {
+        return 2;
       }
     }
-    // return false;
+    for (i = 0; i < $scope.currentUser.toConfirm.length; i++) {
+      if (user._id === $scope.currentUser.toConfirm[i]) {
+        return 3;
+      }
+    }
+    return -1;
   };
   $scope.addFriend = function (user) {
     users.addFriend($scope.currentUser, user).then(function() {
+      $scope.currentUser.requests.push(user._id);
+      user.toConfirm.push($scope.currentUser._id);
+    });
+  };
+
+  $scope.confirmFriend = function (user) {
+    users.confirmFriend($scope.currentUser, user).then(function() {
+      $scope.currentUser.toConfirm.splice($scope.currentUser.toConfirm.indexOf(user._id), 1);
       $scope.currentUser.friends.push(user._id);
+      user.requests.splice(user.requests.indexOf($scope.currentUser._id), 1);
       user.friends.push($scope.currentUser._id);
+      // console.log($scope.currentUser, user);
+    });
+  };
+
+  $scope.cancelRequest = function (user) {
+    users.cancelRequest($scope.currentUser, user).then(function () {
+      $scope.currentUser.requests.splice($scope.currentUser.requests.indexOf(user._id), 1);
+      user.toConfirm.splice(user.toConfirm.indexOf($scope.currentUser._id), 1);
+    });
+  };
+
+  $scope.ignoreRequest = function (user) {
+    users.ignoreRequest($scope.currentUser, user).then(function() {
+      $scope.currentUser.toConfirm.splice($scope.currentUser.toConfirm.indexOf(user._id), 1);
+      user.requests.splice(user.requests.indexOf($scope.currentUser._id), 1);
     });
   };
 

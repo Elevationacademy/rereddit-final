@@ -56,7 +56,7 @@ router.get('/posts', function(req, res, next) {
 router.post('/posts', auth, function(req, res, next) {
   var post = new Post(req.body);
 
-  console.log(req.user);
+  console.log(req.user, req.body);
 
   post.save(function(err, post){
     if(err){ return next(err); }
@@ -114,9 +114,10 @@ router.param('user2', function (req, res, next, id) {
 });
 
 
-router.post('/posts/:post/comments', function(req, res, next) {
+router.post('/posts/:post/comments', auth, function(req, res, next) {
+  console.log(req.post, req.body, req.params);
   var comment = new Comment(req.body);
-  comment.post = req.post;
+  comment.post = req.post; //req has post from the post id param
 
   comment.save(function(err, comment){
     if(err){ return next(err); }
@@ -163,21 +164,65 @@ router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
   });
 });
 
-router.put('/users/:currentUser/friends/:user2/', function (req, res, next) {
+router.put('/users/:currentUser/add/:user2/', function (req, res, next) {
   // req.params
-  console.log(req.params, req.currentUser, req.body);
   // console.log('1');
-  req.currentUser.friends.push(req.params.user2);
-  req.user2.friends.push(req.params.currentUser);
+  req.currentUser.requests.push(req.params.user2); 
+  req.user2.toConfirm.push(req.params.currentUser);
+  // req.currentUser.friends.push(req.params.user2);
+  // req.user2.friends.push(req.params.currentUser);
 
   req.currentUser.save();
     // res.json(user);
 
   req.user2.save();
+  // console.log(req.params, req.currentUser, req.user2);
     // res.json(user);
   res.end();
 });
 
+router.put('/users/:currentUser/confirm/:user2/', function (req, res, next) {
+  // console.log(req.currentUser, req.user2);
+  // req.currentUser.requests.push(req.params.user2); 
+  // req.user2.toConfirm.push(req.params.currentUser);
+  req.currentUser.toConfirm.splice(req.currentUser.toConfirm.indexOf(req.params.user2), 1);
+  req.currentUser.friends.push(req.params.user2);
+  req.user2.requests.splice(req.user2.requests.indexOf(req.params.currentUser), 1);
+  req.user2.friends.push(req.params.currentUser);
+
+
+  req.currentUser.save();
+    // res.json(user);
+
+  req.user2.save();
+  // console.log(req.params, req.currentUser, req.user2);
+    // res.json(user);
+  res.end();
+});
+
+router.put('/users/:currentUser/cancel/:user2/', function (req, res, next) {
+  req.currentUser.requests.splice(req.currentUser.requests.indexOf(req.params.user2), 1);
+  req.user2.toConfirm.splice(req.user2.toConfirm.indexOf(req.params.currentUser), 1);
+  req.currentUser.save();
+    // res.json(user);
+
+  req.user2.save();
+  // console.log(req.params, req.currentUser, req.user2);
+    // res.json(user);
+  res.end();  
+});
+
+router.put('/users/:currentUser/ignore/:user2/', function (req, res, next) {
+  req.currentUser.toConfirm.splice(req.currentUser.toConfirm.indexOf(req.params.user2), 1);
+  req.user2.requests.splice(req.user2.requests.indexOf(req.params.currentUser), 1);
+  req.currentUser.save();
+    // res.json(user);
+
+  req.user2.save();
+  // console.log(req.params, req.currentUser, req.user2);
+    // res.json(user);
+  res.end();  
+});
 
 router.put('/users/:currentUser/remove/:user2/', function (req, res, next) {
   req.currentUser.friends.splice(req.currentUser.friends.indexOf(req.params.user2),1);
