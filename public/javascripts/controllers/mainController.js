@@ -2,6 +2,7 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth', function($scope, posts, a
   $scope.posts = posts.posts;
   // console.log($scope.posts);
   $scope.isLoggedIn = auth.isLoggedIn();
+  $scope.currentUser = auth.currentUser();
   // console.log($scope.isLoggedIn);
   $scope.addPost = function() {
     if ($scope.title === '') { return; }
