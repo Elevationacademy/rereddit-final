@@ -3,7 +3,7 @@
   
   <div ng-if="isNotSelf(user)" class = 'user-list-item'>  
     <div ng-if="isFriend(user)">
-      <button type="button" class="btn btn-danger">Remove Friend</button> {{user.username}}
+      <button ng-click ="removeFriend(user)" type="button" class="btn btn-danger">Remove Friend</button> {{user.username}}
     </div>
 
     <div ng-if="isFriend(user) == false">

@@ -99,6 +99,18 @@ router.param('user', function(req, res, next, id) {
   });
 });
 
+router.param('user2', function(req, res, next, id) {
+  var query = User.findById(id);
+
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('can\'t find user2')); }
+
+    req.user2 = user;
+    return next();
+  });
+});
+
 router.param('comment', function(req, res, next, id) {
   var query = Comment.findById(id);
 
@@ -128,15 +140,29 @@ router.post('/posts/:post/comments', function(req, res, next) {
 });
 
 //post friends
-router.put('/users/:user/', function(req, res, next) {
+router.put('/users/:user/add/:user2', function(req, res, next) {
 
-  var friendUser = new User(req.body);
+  // var friendUser = new User(req.body);
 
-  req.user.friends.push(friendUser);
-  req.body.friends.push(req.user);
-
-  friendUser.save();
+  req.user.friends.push(req.user2);
+  req.user2.friends.push(req.user);
+  // console.log('req.body.friends', req.body.friends)
+  req.user2.save();
   req.user.save();
+  res.end();
+
+});
+
+router.put('/users/:user/remove/:user2', function(req, res, next) {
+  // console.log('req.user.friends:', req.user);
+  console.log('index of req.user2.friends:', req.user2.friends.indexOf(req.user._id));
+  console.log('index of req.user.friends:', req.user.friends.indexOf(req.user2._id));
+  var indexUser = req.user2.friends.indexOf(req.user._id);
+  var indexUser2 = req.user.friends.indexOf(req.user2._id);
+  req.user.friends.splice(indexUser2, 1);
+  req.user2.friends.splice(indexUser, 1);
+  req.user.save();
+  req.user2.save();
   res.end();
 
 });

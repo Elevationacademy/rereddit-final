@@ -18,8 +18,18 @@ app.factory('users', ['$http', function($http) {
 
     addFriend: function(currentUserId, friend){
       console.log("in service add friend");
-      return $http.put('/users/' + currentUserId, friend);
+      return $http.put('/users/' + currentUserId + '/add/'+ friend._id).success(function(data){
+        
+      });
+      // return $http.put('/users/' + currentUserId +'/add/', friend);
     },
+
+    removeFriend: function(currentUserId, friend){
+      console.log('currentUserId:', currentUserId, 'friendID:', friend._id)
+      return $http.put('/users/' + currentUserId + '/remove/'+ friend._id).success(function(data){
+
+      });
+    }
 
   };
 

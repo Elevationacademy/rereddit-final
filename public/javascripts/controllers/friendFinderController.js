@@ -47,4 +47,9 @@ app.controller('FriendFinderCtrl', ['$scope', 'auth','users', function($scope, a
   	users.addFriend(cu._id, friend);	
   }
 
+  $scope.removeFriend = function(friend){
+    console.log('removing', cu._id, friend);
+    users.removeFriend(cu._id, friend);
+  }
+
 }]);
