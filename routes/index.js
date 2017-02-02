@@ -53,6 +53,14 @@ router.get('/posts', function(req, res, next) {
   });
 });
 
+router.get('/users', function(req, res, next){
+  User.find(function(err, users){
+    if(err){return next(err);}
+
+    res.json(users)
+  });
+});
+
 router.post('/posts', auth, function(req, res, next) {
   var post = new Post(req.body);
 
